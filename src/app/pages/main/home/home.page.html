@@ -1,0 +1,16 @@
+<app-header backButton="/home" title="Inicio"></app-header>
+<ion-content>
+
+
+  <!-- =====Nuevo Producto===== -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addUpdateProduct()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-button (click)=" signOut()" expand="block" fill="clear" shape="round">
+    Click me
+  </ion-button>
+
+</ion-content>

@@ -22,7 +22,7 @@ export class HomePage implements OnInit {
     this.getProducts();
   }
 
-  // ============cerrar sesion=========
+  // ===========cerrar sesion=========
 
   signOut() {
     this.firebaseSvc.signOut();
@@ -40,7 +40,7 @@ export class HomePage implements OnInit {
   user(): User {
     return this.utilSvc.getFromLocalStorage('user');
   }
-
+  // ======== Funcion para traer los productos ======
   getProducts() {
     let path = `users/${this.user().uid}/products`;
 

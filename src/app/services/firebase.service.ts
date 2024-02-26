@@ -37,6 +37,8 @@ export class FirebaseService {
   utilSvc = inject(UtilsService);
   storage = inject(AngularFireStorage);
 
+
+  // ===== Usuario =====
   //autentificación//
 
   getAuth() {

@@ -19,7 +19,7 @@ export class UtilsService {
   router = inject(Router);
 
  
-
+// ====== Tomar Foto ======
 async takePicture(promptLabelHeader: string) {
 return await Camera.getPhoto({
     quality: 90,

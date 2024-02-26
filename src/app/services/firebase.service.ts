@@ -18,6 +18,8 @@ import {
   collection,
   collectionData,
   query,
+  updateDoc,
+  deleteDoc,
 } from '@angular/fire/firestore';
 import { UtilsService } from './utils.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -26,6 +28,7 @@ import {
   uploadString,
   ref,
   getDownloadURL,
+  deleteObject,
 } from 'firebase/storage';
 
 @Injectable({
@@ -79,12 +82,22 @@ export class FirebaseService {
 
   getCollectionData(path: string, collectionQuery?: any) {
     const ref = collection(getFirestore(), path);
-    return collectionData(query(ref, collectionQuery), {idField: 'id'});
+    return collectionData(query(ref, collectionQuery), { idField: 'id' });
   }
 
   // // =====Setear un documento=======
   setDocument(path: string, data: any) {
     return setDoc(doc(getFirestore(), path), data);
+  }
+
+  // // =====Actualizar un documento=======
+  updateDocument(path: string, data: any) {
+    return updateDoc(doc(getFirestore(), path), data);
+  }
+
+  // // =====Eliminar un documento=======
+  deleteDocument(path: string) {
+    return deleteDoc(doc(getFirestore(), path));
   }
 
   // =====Obtener un documento===========
@@ -100,11 +113,25 @@ export class FirebaseService {
 
   // =============ALMACENAMIENTO==============
 
+  // ====subir imagen====
+
   async uploadImage(path: string, data_url: string) {
     return uploadString(ref(getStorage(), path), data_url, 'data_url').then(
       () => {
         return getDownloadURL(ref(getStorage(), path));
       }
     );
+  }
+
+  // ====OBTENER RUTA DE LA IMAGEN CON SU URL====
+
+  async getFilePath(url: string) {
+    return ref(getStorage(), url).fullPath;
+  }
+
+  // ====Eliminar archivo====
+
+  deleteFile(path: string) {
+    return deleteObject(ref(getStorage(), path));
   }
 }

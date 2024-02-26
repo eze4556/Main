@@ -1,4 +1,4 @@
-<app-header [isModal]="true" title="Agregar Producto"></app-header>
+<app-header [isModal]="true" [title]="product ? 'Actualizar Producto' : 'Agregar Producto'"></app-header>
 <ion-content>
   <form
     [formGroup]="form"
@@ -54,6 +54,7 @@
        [control]="form.controls.price"
        type="number"
        label="Precio"
+       (ionInput)="setNumberInputs()"
      >
      </app-custom-input>
  
@@ -76,6 +77,7 @@
           [control]="form.controls.soldUnits"
           type="number"
           label="Unidades Vendidas"
+          (ionInput)="setNumberInputs()"
         >
         </app-custom-input>
     
@@ -101,7 +103,7 @@
       type="submit"
       [disabled]="form.invalid"
     >
-      Agregar Producto
+      {{product ? 'Actualizar Producto' : 'Agregar Producto'}}
       <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
     </ion-button>
   </form>

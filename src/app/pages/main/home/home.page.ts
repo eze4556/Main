@@ -40,7 +40,23 @@ export class HomePage implements OnInit {
     );
   }
 
-  // ============cerrar sesion=========
+  doRefresh(event) {
+    setTimeout(() => {
+      this.getProducts();
+      event.target.complete();
+    }, 1000);
+  }
+
+  ////Obtener Ganancias////
+
+  getProfits() {
+    return this.products.reduce(
+      (index, product) => index + product.price * product.soldUnits,
+      0
+    );
+  }
+
+  // ===========cerrar sesion=========
 
   signOut() {
     this.firebaseSvc.signOut();
@@ -61,7 +77,7 @@ export class HomePage implements OnInit {
   user(): User {
     return this.utilSvc.getFromLocalStorage('user');
   }
-
+  // ======== Funcion para traer los productos ======
   getProducts() {
     let path = `users/${this.user().uid}/products`;
 

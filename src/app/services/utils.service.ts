@@ -22,7 +22,7 @@ export class UtilsService {
   alertCtrl= inject(AlertController)
 
  
-
+// ====== Tomar Foto ======
 async takePicture(promptLabelHeader: string) {
 return await Camera.getPhoto({
     quality: 90,

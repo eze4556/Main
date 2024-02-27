@@ -12,6 +12,7 @@ export class HeaderComponent  implements OnInit {
 @Input() title!:string
 @Input() backButton!: string
 @Input() isModal!: boolean
+@Input() showMenu!: boolean
 
 firebaseSvc = inject(FirebaseService);
 utilSvc = inject(UtilsService);

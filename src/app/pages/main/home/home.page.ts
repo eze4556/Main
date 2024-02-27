@@ -4,8 +4,7 @@ import { User } from 'src/app/models/user.model';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { UtilsService } from 'src/app/services/utils.service';
 import { AddUpdateProductComponent } from 'src/app/shared/components/add-update-product/add-update-product.component';
-import { orderBy } from 'firebase/firestore';
-
+import { orderBy, where } from 'firebase/firestore';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +22,22 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.getProducts();
+  }
+
+  doRefresh(event) {
+    setTimeout(() => {
+      this.getProducts();
+      event.target.complete();
+    }, 1000);
+  }
+
+  ////Obtener Ganancias////
+
+  getProfits() {
+    return this.products.reduce(
+      (index, product) => index + product.price * product.soldUnits,
+      0
+    );
   }
 
   // ============cerrar sesion=========
@@ -52,15 +67,12 @@ export class HomePage implements OnInit {
 
     this.loading = true;
 
+    // ===Ordenar====
 
-// ===Ordenar====
-
-    let query = (
-
-     orderBy('soldUnits','desc')
-
-    )
-
+    let query = [
+      orderBy('soldUnits', 'desc'),
+      //  where('soldUnits','>',30)
+    ];
 
     let sub = this.firebaseSvc.getCollectionData(path, query).subscribe({
       next: (res: any) => {

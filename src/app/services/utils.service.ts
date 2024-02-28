@@ -19,35 +19,28 @@ export class UtilsService {
   toastCtrl = inject(ToastController);
   modalCtrl = inject(ModalController);
   router = inject(Router);
-  alertCtrl= inject(AlertController)
+  alertCtrl = inject(AlertController);
 
- 
-// ====== Tomar Foto ======
-async takePicture(promptLabelHeader: string) {
-return await Camera.getPhoto({
-    quality: 90,
-    allowEditing: true,
-    resultType: CameraResultType.DataUrl,
-    source: CameraSource.Prompt,
-    promptLabelHeader,
-    promptLabelPhoto: 'Elegir imagen',
-    promptLabelPicture: 'Tomar Foto',
+  // ====== Tomar Foto ======
+  async takePicture(promptLabelHeader: string) {
+    return await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Prompt,
+      promptLabelHeader,
+      promptLabelPhoto: 'Elegir imagen',
+      promptLabelPicture: 'Tomar Foto',
+    });
+  }
 
-  });
+  // ====ALERTA}====
 
+  async presentAlert(opts?: AlertOptions) {
+    const alert = await this.alertCtrl.create(opts);
 
-};
-
-// ====ALERTA}====
-
-async presentAlert(opts?: AlertOptions) {
-  const alert = await this.alertCtrl.create(opts);
-
-  await alert.present();
-}
-
-
-
+    await alert.present();
+  }
 
   //============Loading===========
   loading() {

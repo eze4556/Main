@@ -40,21 +40,6 @@ export class HomePage implements OnInit {
     );
   }
 
-  doRefresh(event) {
-    setTimeout(() => {
-      this.getProducts();
-      event.target.complete();
-    }, 1000);
-  }
-
-  ////Obtener Ganancias////
-
-  getProfits() {
-    return this.products.reduce(
-      (index, product) => index + product.price * product.soldUnits,
-      0
-    );
-  }
 
   // ===========cerrar sesion=========
 
